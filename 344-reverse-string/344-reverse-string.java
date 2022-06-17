@@ -1,20 +1,20 @@
 class Solution {
     public void reverseString(char[] s) {
         
-        System.out.println(revRecursion(s,0,s.length-1));
+        int start =0 , end = s.length-1;
+       while(start <= end)
+       {
+           if(start> end)
+           {
+               break;
+           }
+           char temp = s[start];
+           s[start]=s[end];
+           s[end]=temp;
+           start++;
+           end--;
+       }
     }
     
-    public char[] revRecursion(char[] s,int start ,int end)
-    {
-        if(start==end || start > end)
-        {
-            return s;
-        }
-        
-        char temp  =  s[start];
-        s[start] = s[end];
-        s[end]=temp;
-        
-        return revRecursion(s,++start,--end);
-        }
+ 
 }
