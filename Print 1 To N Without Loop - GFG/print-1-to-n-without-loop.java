@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial Template for Java
 
 /*package whatever //do not write package name here */
@@ -32,6 +32,7 @@ class Main {
 	}
 }
 
+
 // } Driver Code Ends
 
 
@@ -45,15 +46,13 @@ class Solution
   public void printNos(int N)
     {
         //Your code here
-        if(N==1)
+        
+        if(N>0)
         {
-            System.out.print(1);
-            System.out.print(" ");
-            return;
+            
+            printNos(N-1);
+            System.out.print(N+" ");
         }
-        printNos(N-1);
-        System.out.print(N);
-        System.out.print(" ");
     }
 }
 
