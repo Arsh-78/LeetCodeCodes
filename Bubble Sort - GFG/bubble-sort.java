@@ -1,11 +1,11 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial Template for Java
 
 import java.util.*;
 import java.io.*;
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 //User function Template for Java
 
 class Solution
@@ -14,22 +14,26 @@ class Solution
 	public static void bubbleSort(int arr[], int n)
     {
         //code here
+        if(n<=1)
+        {
+            return ;
+        }
         for(int i=0 ; i<n;i++)
         {
-            for(int j= i+1;j<n;j++)
+            for(int j=1;j<n-i;j++)
             {
-                if(arr[i]>arr[j])
+                if(arr[j-1]>arr[j])
                 {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
+                 int temp = arr[j];
+                 arr[j]=arr[j-1];
+                 arr[j-1]=temp;
                 }
             }
         }
     }
 }
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 class Sorting
 {
@@ -73,4 +77,5 @@ class Sorting
 		}
 	}
 
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
