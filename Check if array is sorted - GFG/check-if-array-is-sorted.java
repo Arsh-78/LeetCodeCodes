@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 // Initial Template for Java
 
 import java.util.*;
@@ -23,6 +23,7 @@ import java.io.*;
         }
     }
 }
+
 // } Driver Code Ends
 
 
@@ -31,20 +32,17 @@ import java.io.*;
 class Solution {
     boolean arraySortedOrNot(int[] arr, int n) {
         // code here
-        boolean ans = helperCheck(arr,0,true);
-        return ans;
-    }
-    boolean helperCheck(int[] arr,int ptr,boolean fans)
-    {
-        if(ptr==arr.length-1)
+        if(arr.length<=1)
         {
             return true;
         }
-        if(arr[ptr]<=arr[ptr+1])
+        for(int i=1 ;i<arr.length;i++)
         {
-            return true && helperCheck(arr,ptr+1,true) ;
+            if(arr[i-1]>arr[i])
+            {
+                return false;
+            }
         }
-        return false ;
-        
+        return true;
     }
 }
