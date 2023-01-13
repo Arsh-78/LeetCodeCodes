@@ -1,24 +1,23 @@
 # Check if array is sorted
-## Easy 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given an array <strong>arr[]&nbsp;</strong>of size <strong>N</strong>, check if it is sorted in non-decreasing order or not.&nbsp;</span></p>
+## Easy
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an array <strong>arr[]&nbsp;</strong>of size <strong>N</strong>, check if it is sorted in non-decreasing order or not.&nbsp;</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre style="position: relative;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>N = 5
 arr[] = {10, 20, 30, 40, 50}
 <strong>Output:</strong> 1
 <strong>Explanation:</strong> The given array is sorted.
-</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</span></pre>
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre style="position: relative;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>N = 6
 arr[] = {90, 80, 100, 70, 40, 30}
 <strong>Output:</strong> 0
-<strong>Explanation:</strong>&nbsp;The given array is not sorted.</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+<strong>Explanation:</strong>&nbsp;The given array is not sorted.</span></pre>
 
 <p><br>
 <span style="font-size:18px"><strong>Your Task:</strong><br>
@@ -34,5 +33,4 @@ You don't need to read input or print anything. Your task is to complete the fun
 1 ≤ Arr[i] ≤ 10<sup>6</sup></span></p>
 
 <p>&nbsp;</p>
- <p></p>
-            </div>
+</div>
