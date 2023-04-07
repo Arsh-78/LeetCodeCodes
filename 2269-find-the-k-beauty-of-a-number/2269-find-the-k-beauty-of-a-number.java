@@ -2,13 +2,9 @@ class Solution {
     public int divisorSubstrings(int num, int k) {
         String nums=Integer.toString(num);
         int start =0;
-        int end=0;
+        int end=start+k;
         int currN;
         int kb=0;
-        while(end-start+1<=k)
-        {
-            end++;
-        }
         
         while(end <= nums.length())
         {
