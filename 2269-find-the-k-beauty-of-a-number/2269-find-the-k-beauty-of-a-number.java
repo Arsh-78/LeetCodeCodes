@@ -4,13 +4,11 @@ class Solution {
         int start =0;
         int end=start+k;
         int currN;
-        int kb=0;
-        
+        int kb=0; 
         while(end <= nums.length())
         {
           currN = Integer.parseInt(nums.substring(start,end));
-            System.out.println(currN);
-            if(isD(num,currN))
+           if(currN!=0 && num%currN==0)
             {
                 kb++;
             }
@@ -20,10 +18,4 @@ class Solution {
         return kb;
     }
     
-    boolean isD(int num,int d)
-    {
-        if(d==0)
-            return false;
-        return num%d==0;
-    }
 }
