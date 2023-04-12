@@ -40,6 +40,8 @@ class Solution {
             }
         }
         
+                   System.out.println(temp);
+         
             if(temp.equals("..") && !st.isEmpty())
             {
                 st.pop();
@@ -50,35 +52,25 @@ class Solution {
             }
             else
             {
-                if(!temp.equals(".."))
+                if(!temp.equals("..") && !temp.equals(""))
                     st.push(temp);
             }
         
-        Stack<String> rev=new Stack<String>();
-        
+       
+       String ans="";
         while(!st.isEmpty())
         {
-            rev.push(st.pop());
-        }
-       String ans="";
-        ans += "/";
-        while(!rev.isEmpty())
-        {
-            if(rev.peek().equals(""))
-            {
-                rev.pop();
-            }
+            if(st.size()==1)
+                ans=st.pop()+ans;
+            
             else
             {
-                ans += rev.pop() + "/";
+                ans ="/"+st.pop() +ans;
             }
         }
         
-        while(ans.charAt(ans.length()-1)=='/' && ans.length()>1)
-        {
-            ans = ans.substring(0,ans.length()-1);
-        }
+        
         System.out.println(ans);
-        return ans;
+        return "/"+ans;
     }
 }
