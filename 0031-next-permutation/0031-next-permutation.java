@@ -19,11 +19,11 @@ class Solution {
         }
         int ngi=bp;
         
-        for(int i=n;i>=0;i--)
+        for(int j=n;j>=0;j--)
         {
-            if(nums[i]>nums[bp])
+            if(nums[j]>nums[bp])
             {
-                ngi = i;
+                ngi = j;
                 break;
             }
         }
