@@ -1,15 +1,15 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
-        int[] allUsed = new int[10];
+      
         HashMap<Integer,String> map = new HashMap<>();
         String t = "abcdefghijklmnopqrstuvwxyz";
         ArrayList<String> ans = new ArrayList<>();
         if(digits.length()==0)
         {
-            return ans;
+            return ans;  //If no keys passed
         }
         int counter =0;
-        for(int i=2;i<=9;i++)
+        for(int i=2;i<=9;i++)  //Making a Hashed Table for Key combinations
         {
             if(i==9)
             {
@@ -26,11 +26,8 @@ class Solution {
                 counter=counter+3;
             }
         }
-        for(int i=0;i<digits.length();i++)
-        {
-            allUsed[digits.charAt(i)-'0']++;
-        }
-        helper("",digits,digits,map,ans);
+    
+        helper("",digits,digits,map,ans); //helper explained in description
         System.out.println(ans);
         
         return ans;
