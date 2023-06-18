@@ -7,11 +7,11 @@ class Solution {
     }    
 
      int res = 0;
-     int quotient =0;
+     //int quotient =0;
      int sign = (divisor>=0)== (dividend>=0) ? 1 :-1;
      dividend = Math.abs(dividend);
      divisor = Math.abs(divisor);
-     System.out.println(sign);
+     //System.out.println(sign);
      while(dividend - divisor >=0) 
      {
          int count = 0;
