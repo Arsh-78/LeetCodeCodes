@@ -42,7 +42,7 @@ class Solution {
         ArrayList<String> lands = new ArrayList<String>();
         boolean[][] vis = new boolean[grid.length][grid[0].length];
         
-        HashSet<ArrayList<String>> st = new HashSet<>(); 
+        HashSet<String> st = new HashSet<>(); 
         
         for(int i=0;i<grid.length;i++)
         {
@@ -50,9 +50,8 @@ class Solution {
             {
                 if(!vis[i][j] && grid[i][j]==1)
                 {
-                    ArrayList<String> t= new ArrayList<>();
-                    dfs(i,j,grid,vis,t,i,j);
-                   // System.out.println(t);
+                    String t= dfs(i,j,grid,vis,"",i,j);
+                   //System.out.println(t);
                     st.add(t);
                 }
             }
@@ -67,47 +66,46 @@ class Solution {
     
     String toString(int r,int c)
     {
-        String temp = Integer.toString(r)+" "+Integer.toString(c); 
+        String temp = Integer.toString(r)+Integer.toString(c) +" "; 
         return temp;
     }
     
-    void dfs(int r,int c,int[][] grid,boolean[][] vis,ArrayList<String> temp,int sr,int sc)
+    String dfs(int r,int c,int[][] grid,boolean[][] vis,String temp,int sr,int sc)
     {
         if( vis[r][c]==true)
         {
-            return;
+            return temp;
         }
         else
         {
             vis[r][c]=true;
-            temp.add(toString(r-sr,c-sc));
+            temp+= toString(r-sr,c-sc);
+            
             
                                     
             if(isValid(r,c+1,grid))
                 if(!vis[r][c+1] && grid[r][c+1]==1)
-                    dfs(r,c+1,grid,vis,temp,sr,sc);
+                    temp=dfs(r,c+1,grid,vis,temp,sr,sc);
                     
 
             
             if(isValid(r+1,c,grid))
                 if(!vis[r+1][c] && grid[r+1][c]==1)
-                    dfs(r+1,c,grid,vis,temp,sr,sc);
+                   temp= dfs(r+1,c,grid,vis,temp,sr,sc);
                     
                     
                                 
             if(isValid(r,c-1,grid))
                 if(!vis[r][c-1] && grid[r][c-1]==1)
-                    dfs(r,c-1,grid,vis,temp,sr,sc);
+                   temp= dfs(r,c-1,grid,vis,temp,sr,sc);
                                 
             if(isValid(r-1,c,grid))
                 if(!vis[r-1][c] && grid[r-1][c]==1)
-                    dfs(r-1,c,grid,vis,temp,sr,sc);
+                    temp=dfs(r-1,c,grid,vis,temp,sr,sc);
                     
-            
-        
-
-
-
+                    
+            //System.out.println(temp);        
+            return temp;
             
         }
     }
