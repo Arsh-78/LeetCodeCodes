@@ -3,7 +3,7 @@ class Solution {
         boolean[] isSafe = new boolean[graph.length];
         
         boolean[] vis =new boolean[graph.length];  
-        
+        int[] pathVis =new int[graph.length];
         ArrayList<Integer> ans = new ArrayList<>();
         for(int i=0;i<graph.length;i++)
         {
@@ -18,7 +18,7 @@ class Solution {
         for(int i=0;i<graph.length;i++)
         {
             if(!vis[i])
-                isSafe[i]=dfs(i,graph,vis,isSafe);
+                isSafe[i]=dfs(i,graph,vis,pathVis,isSafe);
         }
         System.out.println(Arrays.toString(isSafe));
         for(int i=0;i<graph.length;i++)
@@ -33,7 +33,7 @@ class Solution {
 
     }
 
-    public boolean dfs(int node,int[][] graph,boolean[] vis,boolean[] isSafe)
+    public boolean dfs(int node,int[][] graph,boolean[] vis,int[] pathVis,boolean[] isSafe)
     {
         if(vis[node] && isSafe[node])
         {
@@ -46,12 +46,33 @@ class Solution {
         else
         {
             vis[node]=true;
-            boolean res = true;
-            for(int i : graph[node])
-                res=res&&dfs(i,graph,vis,isSafe);
-            isSafe[node]=res;
-            return res;    
-          
+            pathVis[node]= 1;
+            isSafe[node]=true;
+            for(int i :graph[node])
+            {
+                if(!vis[i])
+                {
+                     if(!dfs(i,graph,vis,pathVis,isSafe))
+                     {
+                         isSafe[i]=false;
+                         isSafe[node]=false;
+                     }
+                     
+
+                }
+                else if( pathVis[i]==1)
+                {
+                    isSafe[i]=false;
+                    isSafe[node]=false;
+                }
+                else 
+                {
+                    isSafe[node]= isSafe[node] && isSafe[i];
+                }
+                
+            }
+            pathVis[node]=0;
+            return isSafe[node];
         }
     }
 }
