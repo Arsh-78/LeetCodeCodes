@@ -30,76 +30,86 @@ class Main {
 
 //User function Template for Java
 class Solution {
+    
     class Pair {
-  int first, second;
-  Pair(int _first, int _second) {
-    this.first = _first;
-    this.second = _second;
-  }
-    }
-
-  private void topoSort(int node, ArrayList < ArrayList < Pair >> adj,
-    int vis[], Stack < Integer > st) {
-    //This is the function to implement Topological sort. 
-
-    vis[node] = 1;
-    for (int i = 0; i < adj.get(node).size(); i++) {
-      int v = adj.get(node).get(i).first;
-      if (vis[v] == 0) {
-        topoSort(v, adj, vis, st);
-      }
-    }
-    st.add(node);
-  }
-  public int[] shortestPath(int N, int M, int[][] edges) {
-    ArrayList < ArrayList < Pair >> adj = new ArrayList < > ();
-    for (int i = 0; i < N; i++) {
-      ArrayList < Pair > temp = new ArrayList < Pair > ();
-      adj.add(temp);
-    }
-    //We create a graph first in the form of an adjacency list.
-
-    for (int i = 0; i < M; i++) {
-      int u = edges[i][0];
-      int v = edges[i][1];
-      int wt = edges[i][2];
-      adj.get(u).add(new Pair(v, wt));
-    }
-    int vis[] = new int[N];
-    //Now, we perform topo sort using DFS technique 
-    //and store the result in the stack st.
-
-    Stack < Integer > st = new Stack < > ();
-    for (int i = 0; i < N; i++) {
-      if (vis[i] == 0) {
-        topoSort(i, adj, vis, st);
-      }
-    }
-    //Further, we declare a vector ‘dist’ in which we update the value of the nodes’
-    //distance from the source vertex after relaxation of a particular node.
-    int dist[] = new int[N];
-    for (int i = 0; i < N; i++) {
-      dist[i] = (int)(1e9);
-    }
-
-    dist[0] = 0;
-    while (!st.isEmpty()) {
-      int node = st.peek();
-      st.pop();
-
-      for (int i = 0; i < adj.get(node).size(); i++) {
-        int v = adj.get(node).get(i).first;
-        int wt = adj.get(node).get(i).second;
-
-        if (dist[node] + wt < dist[v]) {
-          dist[v] = wt + dist[node];
+        int node;
+        int dist;
+        Pair(int node,int dist)
+        {
+            this.node=node;
+            this.dist=dist;
         }
-      }
     }
 
-    for (int i = 0; i < N; i++) {
-      if (dist[i] == 1e9) dist[i] = -1;
-    }
-    return dist;
-  }
+	public int[] shortestPath(int n,int m, int[][] edges) {
+		//Code here
+		ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        Stack<Integer> st = new Stack();
+        for(int i=0;i<n;i++)
+        {
+            adj.add(new ArrayList<Pair>());
+        }
+        
+        for(int[] edge : edges)
+        {
+            adj.get(edge[0]).add(new Pair(edge[1],edge[2]));
+        }
+        int[] sp = new int[n];
+        boolean[] vis = new boolean[n];
+        
+        
+        
+        for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
+                topo(i,adj,vis,st);
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            sp[i]= (int)(1e9);
+        }
+        sp[0]=0;
+        
+        while(!st.isEmpty())
+        {
+            int c = st.peek();
+            st.pop();
+            
+            for(int i=0;i<adj.get(c).size();i++)
+            {
+                int v=adj.get(c).get(i).node;
+                int d = adj.get(c).get(i).dist;
+                if(sp[v]>sp[c]+d)
+                {
+                    sp[v]=sp[c]+d;
+                }
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(sp[i]==1e9)
+            {
+                sp[i]=-1;
+            }
+        }
+        return sp;
+	}
+	
+	public void topo(int n , ArrayList<ArrayList<Pair>> adj,boolean[] vis,Stack<Integer> st)
+	{
+	    vis[n]=true;
+	    
+	    for(int i=0 ;i<adj.get(n).size();i++)
+	    {
+	       if(!vis[adj.get(n).get(i).node])
+	       {
+	           topo(adj.get(n).get(i).node,adj,vis,st);
+	       }
+	    }
+	    st.add(n);
+	}
 }
+
+
