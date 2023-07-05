@@ -38,12 +38,34 @@ class Solution{
 
     static Boolean isSubsetSum(int N, int arr[], int sum){
         // code here
-        int[][] dp = new int[N][sum+1];
+        boolean [][] dp = new boolean[N][sum+1];
+    
         for(int i=0;i<N;i++)
         {
-            Arrays.fill(dp[i],-1);
+            dp[i][0]=true;
         }
-        return findT(N-1,arr,sum,dp);
+        if(sum>=arr[0])
+            dp[0][arr[0]]=true;
+        
+        for(int i= 1; i<N;i++)
+        {
+            for(int target=1;target<=sum;target++)
+            {
+                
+        boolean take = false;
+        if(target>=arr[i])
+            take=dp[i-1][target-arr[i]];
+            
+        boolean ntake = dp[i-1][target];
+        
+         dp[i][target]= take | ntake;
+        
+                
+            }
+        }
+        return dp[N-1][sum];
+        
+        
     }
     
     static Boolean findT(int idx, int arr[], int target,int[][] dp)
