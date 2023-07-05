@@ -49,7 +49,7 @@ class Solution{
         
         for(int i= 1; i<N;i++)
         {
-            for(int target=1;target<=sum;target++)
+            for(int target=0;target<=sum;target++)
             {
                 
         boolean take = false;
