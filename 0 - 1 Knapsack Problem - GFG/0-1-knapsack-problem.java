@@ -52,15 +52,16 @@ class Solution
     static int knapSack(int W, int wt[], int val[], int n) 
     { 
          // your code here 
-         int[][] dp = new int[n][W+1];
-         for(int i=0;i<n;i++)
-         {
-             Arrays.fill(dp[i],0);
-         }
+         
+         int[] prev = new int[W+1];
+         int[] cur= new int[W+1];
+         
+         Arrays.fill(prev,0);
+         Arrays.fill(cur,0);
          
         for(int wei=wt[0];wei<=W;wei++)
              {
-                dp[0][wei]=val[0];
+                prev[wei]=val[0];
              }
          
          
@@ -69,16 +70,18 @@ class Solution
          {
              for(int wei = 0;wei<=W;wei++)
              {
-                int nTake = dp[i-1][wei];
+                int nTake = prev[wei];
                 int take = Integer.MIN_VALUE;
                 if(wt[i]<=wei)
-                    take = val[i] + dp[i-1][wei-wt[i]];
+                    take = val[i] + prev[wei-wt[i]];
         
-                dp[i][wei] = Math.max(take,nTake);
+                cur[wei] = Math.max(take,nTake);
              }
-             
+             /*System.out.println(Arrays.toString(prev));
+             System.out.println(Arrays.toString(cur));
+             */prev=Arrays.copyOf(cur,W+1);
          }
-          return dp[n-1][W];
+          return prev[W];
     } 
     
     
