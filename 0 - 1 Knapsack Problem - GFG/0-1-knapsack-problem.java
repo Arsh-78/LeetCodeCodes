@@ -55,14 +55,33 @@ class Solution
          int[][] dp = new int[n][W+1];
          for(int i=0;i<n;i++)
          {
-             Arrays.fill(dp[i],-1);
+             Arrays.fill(dp[i],0);
              
             
          }
-          return kSM(n-1,W,wt,val,dp);
+         for(int wei = wt[0];wei<=W;wei++)
+         {
+             dp[0][wei]=val[0];
+         }
+         
+         for(int i=1;i<n;i++)
+         {
+             for(int wei = 0;wei<=W;wei++)
+             {
+                int nTake = dp[i-1][wei];
+                int take = Integer.MIN_VALUE;
+                if(wt[i]<=wei)
+                    take = val[i] + dp[i-1][wei-wt[i]];
+        
+                dp[i][wei] = Math.max(take,nTake);
+             }
+         }
+          return dp[n-1][W];
     } 
     
-    static int kSM(int i,int mW, int wt[], int val[],int[][] dp)
+    
+    //Memozation
+    /*static int kSM(int i,int mW, int wt[], int val[],int[][] dp)
     {
         if(i==0)
         {
@@ -90,7 +109,7 @@ class Solution
         return dp[i][mW];    
         
     }
-        
+    */    
         
 }
 
