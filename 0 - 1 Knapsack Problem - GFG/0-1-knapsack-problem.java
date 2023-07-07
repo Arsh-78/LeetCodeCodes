@@ -48,16 +48,16 @@ class gfg
 
 class Solution 
 { 
-    //Function to return max value that can be put in knapsack of capacity W.
+    //Function to return max value that can be put in knapsack of capacity W. 
     static int knapSack(int W, int wt[], int val[], int n) 
     { 
          // your code here 
          
          int[] prev = new int[W+1];
-         int[] cur= new int[W+1];
+         
          
          Arrays.fill(prev,0);
-         Arrays.fill(cur,0);
+         
          
         for(int wei=wt[0];wei<=W;wei++)
              {
@@ -68,18 +68,18 @@ class Solution
          
          for(int i=1;i<n;i++)
          {
-             for(int wei = 0;wei<=W;wei++)
+             for(int wei =W;wei>=0;wei--)
              {
                 int nTake = prev[wei];
                 int take = Integer.MIN_VALUE;
                 if(wt[i]<=wei)
                     take = val[i] + prev[wei-wt[i]];
         
-                cur[wei] = Math.max(take,nTake);
+                prev[wei] = Math.max(take,nTake);
              }
              /*System.out.println(Arrays.toString(prev));
              System.out.println(Arrays.toString(cur));
-             */prev=Arrays.copyOf(cur,W+1);
+             */
          }
           return prev[W];
     } 
