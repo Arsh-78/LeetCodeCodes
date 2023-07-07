@@ -56,13 +56,14 @@ class Solution
          for(int i=0;i<n;i++)
          {
              Arrays.fill(dp[i],0);
-             
-            
          }
-         for(int wei = wt[0];wei<=W;wei++)
-         {
-             dp[0][wei]=val[0];
-         }
+         
+        for(int wei=wt[0];wei<=W;wei++)
+             {
+                dp[0][wei]=val[0];
+             }
+         
+         
          
          for(int i=1;i<n;i++)
          {
@@ -75,6 +76,7 @@ class Solution
         
                 dp[i][wei] = Math.max(take,nTake);
              }
+             
          }
           return dp[n-1][W];
     } 
