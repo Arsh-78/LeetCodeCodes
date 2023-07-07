@@ -35,6 +35,8 @@ class Solution{
 
     public int countPartitions(int n, int d, int arr[]){
         // Code here
+         int mod = 1000000007;
+       
         int total=0;
         for(int i=0;i<n;i++)
         {
@@ -45,6 +47,26 @@ class Solution{
         {
             Arrays.fill(dp[i],-1);
         }
+        
+        //dp[n][(total+d)/2]=1;
+        /*
+        for(int i=n-1 ; i>0;i--)
+        {
+            for(int target=0;target<=total;target++)
+            {
+                    int take=dp[i+1][target];
+                    int ntake=0;
+                    if(2*target-total >=d )
+                    {
+                        ntake=dp[i+1][target-arr[i-1]];
+                    }
+            
+                     dp[i][target]=(take+ntake)%mod;
+            }
+        }
+        return dp[0][total];
+        */
+        //memoization
         return countPM(0,total,arr,total,d,dp);
         
     }
