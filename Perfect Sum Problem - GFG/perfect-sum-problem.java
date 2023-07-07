@@ -32,16 +32,45 @@ class Solution{
 	    // Your code goes here
 	    int mod = 1000000007;
 	    int[][] dp = new int[n][sum+1];
+	    
+
 	    for(int i=0;i<n;i++)
 	    {
-	        Arrays.fill(dp[i],-1);
+	        //Arrays.fill(dp[i],-1); memoization
+	        
+	        Arrays.fill(dp[i],-0);
+ 	    }
+	    if(arr[n-1]==0)
+	    {
+	        dp[n-1][0]=2;
 	    }
-	    return helper(0,arr,sum,dp)%mod; 
+	    else
+	    {
+	        dp[n-1][0]=1;
+	        dp[n-1][arr[n-1]]=1;
+	    }
+	    
+	    for(int i=n-2;i>=0;i--)
+	    {
+	        for(int t=0;t<=sum;t++)
+	        {
+	       int take=0;
+	    if(t>=arr[i])
+	        take = dp[i+1][t-arr[i]]%mod;
+	    int ntake = dp[i+1][t]%mod;
+	    dp[i][t]=(take+ntake)%mod;
+	    
+	        }
+	    }
+	    
+	    return dp[0][sum]; 
 	}
 	
 	public int helper(int i ,int[] arr,int curSum,int[][] dp)
 	{
 	    int mod = 1000000007;
+	    
+	    
 	    
 	    if(i==arr.length-1)
 	    {
