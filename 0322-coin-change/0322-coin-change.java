@@ -6,14 +6,6 @@ class Solution {
         {
             Arrays.fill(dp[i],0);
         }
-        if(coins.length==1)
-        {
-            if(amount % coins[0]==0)
-            {
-                return amount/coins[0];
-            }
-            return -1;
-        }
 
         for(int i=0;i<=amount;i++)
         {
