@@ -32,11 +32,30 @@ class Solution{
         int[][] dp = new int[p][n+1];
         for(int i=0;i<p;i++)
         {
-            Arrays.fill(dp[i],-1);
+            Arrays.fill(dp[i],0);
+        }
+        for(int i=0;i<=n;i++)
+        {
+            
+                dp[0][i]=i* price[0];
         }
         
+        for(int i=1;i<p;i++)
+        {
+            for(int l=0;l<=n;l++)
+            {
+                int ntake = dp[i-1][l];
+                int take = 0;
+                if(i+1<=l)
+                take  = price[i] +dp[i][l-i-1];
+                dp[i][l]=Math.max(take,ntake);
+            }
+            
+        }
         
-        return crm(price.length-1,n,price,dp);
+        //return crm(price.length-1,n,price,dp);
+        
+        return dp[p-1][n];
     }
     
     public int crm(int i,int l,int[] price,int[][] dp)
