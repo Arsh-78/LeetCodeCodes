@@ -34,10 +34,24 @@ class Solution
         
         for(int i=0;i<=x;i++)
         {
-            Arrays.fill(dp[i],-1);
+            Arrays.fill(dp[i],0);
         }
         
-        return lcsM(x,y,s1,s2,dp);
+        for(int i=1;i<=x;i++)
+        {
+            for(int j=1;j<=y;j++)
+            {
+                        
+                if(s1.charAt(i-1)==s2.charAt(j-1))
+                    dp[i][j]=1 +dp[i-1][j-1];
+    
+                else
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+            }
+        }
+        
+        //return lcsM(x,y,s1,s2,dp);
+        return dp[x][y];
         
     }
     
