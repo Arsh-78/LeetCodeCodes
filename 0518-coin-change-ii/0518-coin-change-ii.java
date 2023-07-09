@@ -4,9 +4,31 @@ class Solution {
         int[][] dp =new int[n][amount+1];
         for(int i=0;i<n;i++)
         {
-            Arrays.fill(dp[i],-1);
+            Arrays.fill(dp[i],0);
         }
-        return changeM(n-1,amount,coins,dp);
+        for(int i=0;i<=amount;i++)
+        {
+            if(i%coins[0]==0)
+            {
+                dp[0][i]=1;
+            }
+        }
+        for(int i=1;i<n;i++)
+        {
+            for(int amt=0;amt<=amount;amt++)
+            {
+                int ntake= dp[i-1][amt];
+                int take =0;
+                if(amt>=coins[i])
+                {
+                    take= dp[i][amt-coins[i]];
+                }
+ 
+               dp[i][amt]=take+ntake;
+
+            }
+        }
+        return dp[n-1][amount];
     }
 
     public int changeM(int i,int amt,int[] coins,int[][] dp) 
@@ -31,5 +53,6 @@ class Solution {
         }
 
         return dp[i][amt]=take+ntake;
+        
     }
 }
