@@ -1,12 +1,39 @@
 class Solution {
     public int maxProfit(int[] prices) {
-        int[][][] dp = new int[prices.length][2][3];
-        for(int i=0;i<prices.length;i++)
+        int[][] after = new int[2][3];
+        int[][] cur = new int[2][3];
+        
+       for(int i=0;i<2;i++)
+       {
+           Arrays.fill(after[i],0);
+           Arrays.fill(cur[i],0);
+       }
+        
+        for(int i=prices.length-1;i>=0;i--)
         {
-            Arrays.fill(dp[i][0],-1);
-            Arrays.fill(dp[i][1],-1);
+
+            for(int buy=0;buy<=1;buy++)
+            {
+                for(int cap=1;cap<=2;cap++)
+                {
+                    if(buy==1)
+                    {
+                        cur[buy][cap]=Math.max(
+                        after[0][cap]-prices[i],
+                        after[1][cap] );
+                     }
+                    else
+                    {
+                        cur[buy][cap]=Math.max(
+                        after[1][cap-1] + prices[i],
+                        after[0][cap]);
+                    }
+                    
+                }
+            }
+            after=cur;
         }
-        return maxPm(0,1,2,prices,dp);
+        return after[1][2];
     }
 
     int maxPm(int i ,int buy,int cap ,int[] prices,int[][][] dp)
