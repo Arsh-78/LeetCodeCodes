@@ -1,32 +1,50 @@
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        int[] ans = new int[nums1.length];
+        Stack<Integer> st = new Stack<>();
+        HashMap<Integer,Integer> nge2 =new HashMap<>();
+        int[] nge1 =new int[nums1.length];
         
-        for(int i=0 ; i<nums1.length;i++)
+        int i = nums1.length-1;
+        int j= nums2.length-1;
+        nge2.put(nums2[j],-1);
+        st.push(nums2[j]);
+        j--;
+        while(j>=0)
         {
-            int j=0;
-            ans[i]=-1;
-            while(j<nums2.length && nums2[j]!=nums1[i])
+            if(nums2[j]>nums2[j+1])
             {
-                
-                    j++;
-               
-            }
-            System.out.print("Index : "+j);
-            while(j<nums2.length)
-            {
-                if(nums2[j]>nums1[i])
+                while(!st.isEmpty() && st.peek()<=nums2[j])
                 {
-                    ans[i]=nums2[j];
-                    System.out.println("Grater :"+j);
-                    break;
+                    st.pop();
                 }
-                    j++;
-            }
+                if(st.isEmpty())
+                {
                     
+                    nge2.put(nums2[j],-1);
+                }
+                else
+                    nge2.put(nums2[j],st.peek());
+                st.push(nums2[j]);
                 
             }
-        
-        return ans;
+            else
+            {
+                if(st.isEmpty())
+                {
+                    nge2.put(nums2[j],-1);
+                }
+                else
+                     nge2.put(nums2[j],st.peek());
+                st.push(nums2[j]);
+            }
+            j--;
+           
+        }
+        while(i>=0)
+        {
+            nge1[i] = nge2.get(nums1[i]);
+            i--;
+        }
+        return nge1;
     }
 }
