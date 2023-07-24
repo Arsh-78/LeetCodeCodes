@@ -7,7 +7,7 @@ class Solution {
         int[] dp = new int[n]; //longest predecessor sequence till n
         
         Arrays.sort(words,Comparator.comparingInt(String :: length));
-        System.out.println(Arrays.toString(words));
+        //System.out.println(Arrays.toString(words));
         
         Arrays.fill(dp,1);
        
