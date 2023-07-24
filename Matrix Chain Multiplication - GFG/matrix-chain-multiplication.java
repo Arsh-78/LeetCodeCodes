@@ -35,9 +35,25 @@ class Solution{
         int[][] dp = new int[N][N];
         
         for(int i=0;i<N;i++)
-            Arrays.fill(dp[i],-1);
+            dp[i][i]=0;
+            //Arrays.fill(dp[i],0);]
             
-        return helper(1,N-1,arr,dp);
+            
+            for(int i=N-1;i>=1;i--)
+            {
+                for(int j=i+1;j<N;j++)
+                {
+                    int min = (int)1e9;
+                    for(int k=i;k<j;k++)
+                    {
+                        int steps = arr[i-1] * arr[k] * arr[j] + dp[i][k]+dp[k+1][j];
+                        min = Math.min(min,steps);
+                    }
+                    dp[i][j]=min;
+                }
+            }
+            
+        return dp[1][N-1];
         
     }
     
