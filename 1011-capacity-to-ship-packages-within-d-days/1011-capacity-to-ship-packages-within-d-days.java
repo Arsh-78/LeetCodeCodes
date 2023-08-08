@@ -1,72 +1,56 @@
 class Solution {
     public int shipWithinDays(int[] weights, int days) {
-        
-        int s = 1;
-        int e=0;
+        int start = 1;
+        int end = 0;
+        int ans = Integer.MAX_VALUE;
         for(int i=0;i<weights.length;i++)
         {
-            e+=weights[i];
+            end+=weights[i];
         }
-        int mid=0;
-        int ans =0;
-        while(s<=e)
+        while(start<=end)
         {
-            mid = s+ (e-s)/2;
-            if(helper(weights,mid) <= days)
+            int mid = (start+end)/2;
+            
+            if(shipD(weights,mid) <=days)
             {
-                ans = mid;
-                e = mid-1;
+                ans=Math.min(ans,mid);
+                end=mid-1;
             }
             else
             {
-                s=mid+1;
-            }
-        
-        }
-       
-        return ans;
-        
-        
-    }
-    
-    public int helper(int[] weights,int cap)
-    {
-        int counter=0;
-        int i=0;
-        int pkgwt=0;
-        int e = weights.length;
-        while(i<weights.length)
-        {
-            pkgwt = pkgwt +weights[i];
-            if(weights[i] > cap)
-            {
-                return Integer.MAX_VALUE;
-            }
-            if(pkgwt < cap )
-            {
-                if(i==e-1)
-                {
-                    counter++;
-                    break;
-                }
-                i++;
-                
-            }
-            else
-            {
-                
-                if(pkgwt==cap)
-                {
-                    i++;
-                }
-               
-                pkgwt=0;
-               counter++;
+                start=mid+1;
             }
             
-           
         }
-        System.out.println("Capacity : " + cap+" Days: "+ counter);
-        return counter;
+        return ans;
     }
-}
+    
+    public int shipD(int[] weights, int cap)
+    {
+        int cur=cap;
+        int d=0;
+        int i=0;
+        while(i<weights.length)
+        {
+            if(weights[i]<= cur)
+            {
+                cur=cur-weights[i];
+                i++;
+            }
+            else
+            {
+                if(weights[i]>cap)
+                    return Integer.MAX_VALUE;
+                else
+                {
+                    d++;
+                    cur=cap;
+                }
+            }
+        }
+        //System.out.println(cap + " "+d);
+        // if(cur!=0)
+        //     return d+1;
+        return d+1;
+        }
+    }
