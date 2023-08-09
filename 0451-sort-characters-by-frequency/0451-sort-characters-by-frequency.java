@@ -17,12 +17,12 @@ class Solution {
     public String frequencySort(String s) {
         
         HashMap<Character,Integer> mp =new HashMap<>();
-        char[] car = s.toCharArray();
+        //char[] car = s.toCharArray();
         PriorityQueue<Pair> pq  = new PriorityQueue<>();
         
-        for(int i=0;i<car.length;i++)
+        for(int i=0;i<s.length();i++)
         {
-            mp.put(car[i],mp.getOrDefault(car[i],0)+1);
+            mp.put(s.charAt(i),mp.getOrDefault(s.charAt(i),0)+1);
             //System.out.println(mp.get(car[i]));
         }
         
