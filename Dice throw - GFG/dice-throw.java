@@ -31,11 +31,31 @@ class Solution {
         long[][] dp = new long[N+1][X+1];
         for(int i=0;i<=N;i++)
         {
-            Arrays.fill(dp[i],-1);
+            Arrays.fill(dp[i],0);
+        }
+        dp[0][0]=1;
+        
+        for(int i=1;i<=N;i++)
+        {
+            for(int j=1;j<=X;j++)
+            {
+                long ways=0;
+                for(int k=1;k<=M;k++)
+                {
+                    if(j-k<0)
+                    {
+                        break;
+                    }
+                    ways+=dp[i-1][j-k];
+                }
+                dp[i][j]=ways;
+            }
         }
         // code here
-        return helper(N,M,X,dp);
+        //return helper(N,M,X,dp);
+        return dp[N][X];
     }
+    
     
     static long helper(int d,int c,int s,long[][] dp)
     {
