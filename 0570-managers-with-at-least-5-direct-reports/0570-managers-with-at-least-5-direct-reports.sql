@@ -1,2 +1,2 @@
 # Write your MySQL query statement below
-SELECT e2.name from Employee e1 INNER JOIN Employee e2 ON e1.managerId = e2.id GROUP BY e2.id HAVING COUNT(e2.id)>=5;
+select e1.name from Employee e1 join (select e2.managerId,COUNT(e2.managerId) as heads from Employee e2 group by e2.managerId having COUNT(e2.managerId)>=5)e where e1.id = e.managerId ;
