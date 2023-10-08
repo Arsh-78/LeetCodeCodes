@@ -1,38 +1,27 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        
-        List<List<Integer>>ans = new ArrayList<List<Integer>>();
-        ArrayList<Integer> temp = new ArrayList<>();
-        helper(candidates,target,0,0,ans,temp);
-        return ans;
+     List<List<Integer>> ans = new ArrayList<List<Integer>>();
+     List<Integer> s = new ArrayList<>();
+     helper(0,candidates,target,s,ans);
+     return ans;
     }
 
-//helper(candidates,target,i+1,curSum,fans,temp);
-    public void helper(int[] candidates,int target,int i,int curSum, List<List<Integer>> fans,ArrayList<Integer> temp)
+    public void helper(int i ,int[] a,int target,List<Integer> cur,List<List<Integer>> ans)
     {
+        if(i==a.length )
+        {
+            if(target==0)
+                ans.add(new ArrayList<Integer>(cur));
+            
+            return;
+        }
+        if(target-a[i]>=0)
+        {
+            cur.add(a[i]);
+            helper(i,a,target-a[i],cur,ans);
+            cur.remove(cur.size()-1);
+        }
+        helper(i+1,a,target,cur,ans);
         
-        if(i>=candidates.length)
-        {
-            return;
-        }
-        if(curSum>target)
-        {
-            
-            return;
-        }
-        if(curSum==target)
-        {
-            
-            fans.add(new ArrayList<Integer>(temp));
-            return ;
-        }
-        else
-        {
-            temp.add(candidates[i]);
-            helper(candidates,target,i,curSum+candidates[i],fans,temp);
-            temp.remove(temp.size()-1);
-            helper(candidates,target,i+1,curSum,fans,temp);
-            return;
-        }
     }
 }
